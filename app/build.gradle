@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
+
+android {
+    dataBinding {
+        enabled = true
+    }
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        applicationId "com.example.samplemvvm"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+
+    implementation "com.android.support:multidex:$rootProject.multidex_version"
+
+    // Navigation component
+    implementation "android.arch.navigation:navigation-fragment:$rootProject.nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui:$rootProject.nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.nav_version" // use -ktx for Kotlin
+    implementation "android.arch.work:work-runtime-ktx:$rootProject.work_version" // use -ktx for Kotlin
+
+    // Databinding compiler
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.android.databinding:compiler:$rootProject.dataBinding_compiler_version"
+
+    //event bus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //room
+    implementation "androidx.room:room-runtime:$rootProject.room_version"
+    kapt "androidx.room:room-compiler:$rootProject.room_version"
+    implementation "androidx.room:room-rxjava2:$rootProject.room_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_log_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_convert_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_convert_version"
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
+
+    // Reactive Streams (RxJava transformed into LiveData)
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$reactivestreams_version"
+
+    // image
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+
+    // dagger 2 dagger_version
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version" // if you use the support libraries
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+}
